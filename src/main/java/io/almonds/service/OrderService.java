@@ -2,25 +2,35 @@ package io.almonds.service;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.almonds.entity.Order;
 
-public interface OrderService {
+public class OrderService {
 
-  static OrderService get(int mode) {
-    if (mode == 1)
-      return new MemoryOrderService();
+  private Map<Integer, Order> orders = new HashMap<>();
 
-    return null;
+  public Order createAnOrder(String item, String sugarLevel, String iceLevel, BigDecimal price) {
+    Order order = new Order(item, sugarLevel, iceLevel, price);
+    orders.put(order.getOrderNo(), order);
+    return order;
   }
 
-  public Order createAnOrder(String item, String sugarLevel, String iceLevel, BigDecimal price);
+  public Collection<Order> getOrders() {
+    return orders.values();
+  }
 
-  public Collection<Order> getOrders();
+  public Order getOrderByNo(int orderNo) {
+    return orders.get(orderNo);
+  }
 
-  public Order getOrderByNo(int orderNo);
+  public Order updateOrder(int orderNo, Order order) {
+    orders.put(orderNo, order);
+    return order;
+  }
 
-  public Order updateOrder(int orderNo, Order order);
-
-  public Order deleteOrder(int orderNo);
+  public Order deleteOrder(int orderNo) {
+    return orders.remove(orderNo);
+  }
 }

@@ -8,7 +8,7 @@ public class App {
     private static final String COMMAND_HINT = "Please specify an action: [create(c)/read(r)/update(u)/delete(d)/export(e)/exit]";
 
     public static void main(String[] args) {
-        OrderService orderService = OrderService.get(1);
+        OrderService orderService = new OrderService();
         try (Scanner scanner = new Scanner(System.in)) {
             PromptOrder promptOrder = new PromptOrder(orderService, scanner);
             PromptExport export = new PromptExport(scanner);
