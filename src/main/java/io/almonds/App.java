@@ -8,8 +8,20 @@ public class App {
     private static final String COMMAND_HINT = "Please specify an action: [create(c)/read(r)/update(u)/delete(d)/export(e)/exit]";
 
     public static void main(String[] args) {
-        OrderService orderService = OrderService.get(1);
         try (Scanner scanner = new Scanner(System.in)) {
+            OrderService orderService = null;
+            while (orderService == null) {
+                System.out.println("Please choose service mode: 1 for in-memory, 2 for database");
+                String serviceMode = scanner.nextLine();
+                try {
+                    int mode = Integer.parseInt(serviceMode);
+                    orderService = OrderService.get(mode);
+                } catch (Exception e) {
+                    System.err.println("Unknown Service mode: " + serviceMode);
+                    continue;
+                }
+            }
+
             PromptOrder promptOrder = new PromptOrder(orderService, scanner);
             PromptExport export = new PromptExport(scanner);
 

@@ -10,6 +10,8 @@ public interface OrderService {
   static OrderService get(int mode) {
     if (mode == 1)
       return new MemoryOrderService();
+    if (mode == 2)
+      return new DbOrderService();
 
     return null;
   }

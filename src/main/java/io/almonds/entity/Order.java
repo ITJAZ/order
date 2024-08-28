@@ -13,12 +13,16 @@ public class Order implements Serializable {
 
   private static int orderNoCounter = 0;
 
-  public Order(String item, String sugarLevel, String iceLevel, BigDecimal price) {
-    this.orderNo = ++orderNoCounter;
+  public Order(int orderNo, String item, String sugarLevel, String iceLevel, BigDecimal price) {
+    this.orderNo = orderNo;
     this.item = item;
     this.sugarLevel = sugarLevel;
     this.iceLevel = iceLevel;
     this.price = price;
+  }
+
+  public Order(String item, String sugarLevel, String iceLevel, BigDecimal price) {
+    this(++orderNoCounter, item, sugarLevel, iceLevel, price);
   }
 
   public void setItem(String item) {
