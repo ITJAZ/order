@@ -14,7 +14,7 @@ public class PromptOrder {
 
   public PromptOrder(Scanner scanner) {
     this.scanner = scanner;
-    this.orderService = new OrderService();
+    this.orderService = OrderService.get(1);
   }
 
   public void create() {
