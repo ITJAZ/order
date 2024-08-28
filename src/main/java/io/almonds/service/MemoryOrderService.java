@@ -7,7 +7,7 @@ import java.util.Map;
 
 import io.almonds.entity.Order;
 
-public class MemoryOrderService implements OrderService {
+class MemoryOrderService implements OrderService {
 
   private Map<Integer, Order> orders = new HashMap<>();
 
