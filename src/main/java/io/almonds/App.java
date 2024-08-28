@@ -1,12 +1,11 @@
 package io.almonds;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class App {
     private static final String COMMAND_HINT = "Please specify an action: [create(c)/read(r)/update(u)/delete(d)/export(e)/exit]";
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             PromptOrder promptOrder = new PromptOrder(scanner);
             String input;
