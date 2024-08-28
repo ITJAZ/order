@@ -43,6 +43,7 @@ public class App {
                     case "export":
                     case "e":
                         export.export(orderService);
+                        System.out.println(COMMAND_HINT);
                         break;
                     default:
                         System.out.printf("Unknown command: %s \n", input);
