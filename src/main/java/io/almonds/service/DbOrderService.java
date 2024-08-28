@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,24 +25,14 @@ class DbOrderService implements OrderService {
         }
       }
 
-      if (tableCount != 0)
+      if (tableCount != 0) {
+        System.out.println("table exists");
         return;
+      }
 
       String createTableScript = "CREATE TABLE IF NOT EXISTS ORDERS (ORDER_NO INT, ITEM VARCHAR(10), SUGAR_LEVEL VARCHAR(10), ICE_LEVEL VARCHAR(10), PRICE DOUBLE)";
       try (PreparedStatement preparedStatement = connection.prepareStatement(createTableScript)) {
         preparedStatement.execute();
-      }
-      String selectTableSql2 = "SELECT * FROM INFORMATION_SCHEMA.TABLES ";
-      try (PreparedStatement preparedStatement = connection.prepareStatement(selectTableSql2);
-          ResultSet resultSet = preparedStatement.executeQuery()) {
-        ResultSetMetaData metaData = resultSet.getMetaData();
-        int columnCount = metaData.getColumnCount();
-        while (resultSet.next()) {
-          for (int i = 1; i <= columnCount; i++) {
-            String columnName = metaData.getColumnName(i);
-            System.out.println(columnName + ":" + resultSet.getString(i));
-          }
-        }
       }
 
       System.out.println("table created");
