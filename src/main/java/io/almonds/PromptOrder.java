@@ -18,6 +18,7 @@ public class PromptOrder {
   }
 
   public void create() {
+    System.out.println("Creating Mode... ");
     System.out.println("Please enter your item name: ");
     String item = scanner.nextLine();
     System.out.println("Please enter your sugar level: ");
@@ -54,7 +55,37 @@ public class PromptOrder {
   }
 
   public void read() {
+    System.out.println("Reading mode... ");
+    System.out.println("Please enter an order no or * for all: ");
+    String orderNoString = scanner.nextLine();
 
+    int tried = 0;
+    int orderNo = -1;
+
+    while (tried++ < 3) {
+      if ("*".equals(orderNoString)) {
+        System.out.println("Listing all orders");
+        System.out.println(orderService.getOrders());
+        return;
+      }
+
+      try {
+        orderNo = Integer.parseInt(orderNoString);
+        break;
+      } catch (Exception e) {
+        System.err.printf("Invalid order no input: %s, only accept number... \n", orderNoString);
+        System.out.println("Please enter the order no: ");
+        orderNoString = scanner.nextLine();
+        continue;
+      }
+    }
+    Order order = orderService.getOrderByNo(orderNo);
+    if (order == null) {
+      System.err.println("Order not found: " + orderNo);
+      return;
+    }
+    System.out.println("Order info with no: " + orderNo);
+    System.out.println(order);
   }
 
   public void update() {
