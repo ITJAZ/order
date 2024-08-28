@@ -33,6 +33,8 @@ public class PromptOrder {
         price = new BigDecimal(priceString);
       } catch (Exception e) {
         System.err.printf("Invalid price input: %s, only accept number... \n", priceString);
+        System.out.println("Please enter the price: ");
+        priceString = scanner.nextLine();
         continue;
       }
     }
