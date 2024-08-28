@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 public class Order implements Serializable {
 
-  private int orderNo;
+  private final int orderNo;
   private String item;
   private String sugarLevel;
   private String iceLevel;
@@ -18,6 +18,22 @@ public class Order implements Serializable {
     this.item = item;
     this.sugarLevel = sugarLevel;
     this.iceLevel = iceLevel;
+    this.price = price;
+  }
+
+  public void setItem(String item) {
+    this.item = item;
+  }
+
+  public void setSugarLevel(String sugarLevel) {
+    this.sugarLevel = sugarLevel;
+  }
+
+  public void setIceLevel(String iceLevel) {
+    this.iceLevel = iceLevel;
+  }
+
+  public void setPrice(BigDecimal price) {
     this.price = price;
   }
 
