@@ -8,13 +8,12 @@ import io.almonds.service.OrderService;
 
 public class PromptOrder {
 
+  private OrderService orderService;
   private Scanner scanner;
 
-  private OrderService orderService;
-
-  public PromptOrder(Scanner scanner) {
+  public PromptOrder(OrderService orderService, Scanner scanner) {
     this.scanner = scanner;
-    this.orderService = OrderService.get(1);
+    this.orderService = orderService;
   }
 
   public void create() {

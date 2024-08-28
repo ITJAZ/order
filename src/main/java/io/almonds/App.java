@@ -2,12 +2,17 @@ package io.almonds;
 
 import java.util.Scanner;
 
+import io.almonds.service.OrderService;
+
 public class App {
     private static final String COMMAND_HINT = "Please specify an action: [create(c)/read(r)/update(u)/delete(d)/export(e)/exit]";
 
     public static void main(String[] args) {
+        OrderService orderService = OrderService.get(1);
         try (Scanner scanner = new Scanner(System.in)) {
-            PromptOrder promptOrder = new PromptOrder(scanner);
+            PromptOrder promptOrder = new PromptOrder(orderService, scanner);
+            PromptExport export = new PromptExport(scanner);
+
             String input;
             System.out.println(COMMAND_HINT);
             while (!"exit".equals(input = scanner.nextLine())) {
@@ -34,6 +39,10 @@ public class App {
                     case "d":
                         promptOrder.delete();
                         System.out.println(COMMAND_HINT);
+                        break;
+                    case "export":
+                    case "e":
+                        export.export(orderService);
                         break;
                     default:
                         System.out.printf("Unknown command: %s \n", input);
