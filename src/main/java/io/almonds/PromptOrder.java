@@ -27,9 +27,8 @@ public class PromptOrder {
     String iceLevel = scanner.nextLine();
     System.out.println("Please enter the price: ");
     String priceString = scanner.nextLine();
-    int tried = 0;
     BigDecimal price = null;
-    while (tried++ < 3) {
+    while (price == null) {
       try {
         price = new BigDecimal(priceString);
       } catch (Exception e) {
@@ -38,11 +37,6 @@ public class PromptOrder {
         priceString = scanner.nextLine();
         continue;
       }
-    }
-
-    if (price == null) {
-      System.err.println("Too many invalid tried, aborting...");
-      return;
     }
 
     Order order = orderService.createAnOrder(item, sugarLevel, iceLevel, price);
@@ -59,10 +53,9 @@ public class PromptOrder {
     System.out.println("Please enter an order no or * for all: ");
     String orderNoString = scanner.nextLine();
 
-    int tried = 0;
-    int orderNo = -1;
+    int orderNo;
 
-    while (tried++ < 3) {
+    while (true) {
       if ("*".equals(orderNoString)) {
         System.out.println("Listing all orders");
         System.out.println(orderService.getOrders());
