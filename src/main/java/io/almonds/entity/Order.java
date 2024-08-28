@@ -59,12 +59,12 @@ public class Order implements Serializable {
 
   @Override
   public String toString() {
-    StringBuffer orderAsString = new StringBuffer();
+    StringBuffer orderAsString = new StringBuffer(System.lineSeparator());
 
-    orderAsString.append("orderNo: ").append(orderNo).append(System.lineSeparator());
-    orderAsString.append("item: ").append(item).append(System.lineSeparator());
-    orderAsString.append("sugarLevel: ").append(sugarLevel).append(System.lineSeparator());
-    orderAsString.append("iceLevel: ").append(iceLevel).append(System.lineSeparator());
+    orderAsString.append("orderNo: ").append(orderNo).append("|");
+    orderAsString.append("item: ").append(item).append("|");
+    orderAsString.append("sugarLevel: ").append(sugarLevel).append("|");
+    orderAsString.append("iceLevel: ").append(iceLevel).append("|");
     orderAsString.append("price: ").append(price).append(System.lineSeparator());
 
     return orderAsString.toString();
