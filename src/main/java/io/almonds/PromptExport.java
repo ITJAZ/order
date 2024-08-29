@@ -30,7 +30,7 @@ public class PromptExport {
       }
     }
 
-    File file = new File("output.csv");
+    File file = new File("output." + exporter.getExtensionName());
     try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
       exporter.export(fileOutputStream, orderService.getOrders());
     } catch (IOException e) {

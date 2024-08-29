@@ -34,4 +34,9 @@ class CsvExporter implements Exporter {
     }
   }
 
+  @Override
+  public String getExtensionName() {
+    return "csv";
+  }
+
 }

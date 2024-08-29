@@ -10,10 +10,14 @@ public interface Exporter {
   static Exporter get(int mode) {
     if (mode == 1)
       return new CsvExporter();
+    if (mode == 2)
+      return new ExcelExporter();
 
     return null;
   }
 
-  public void export(OutputStream os, Collection<Order> orders);
+  void export(OutputStream os, Collection<Order> orders);
+
+  String getExtensionName();
 
 }

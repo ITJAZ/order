@@ -42,8 +42,7 @@ public class PromptOrder {
 
     System.out.println("Order Created.");
     System.out.println(order);
-    System.out.println("Current Orders: ");
-    System.out.println(orderService.getOrders());
+    printCurrentOrdersAndTotalAmount();
     return;
   }
 
@@ -58,6 +57,7 @@ public class PromptOrder {
       if ("*".equals(orderNoString)) {
         System.out.println("Listing all orders");
         System.out.println(orderService.getOrders());
+        printCurrentOrdersAndTotalAmount();
         return;
       }
 
@@ -128,8 +128,7 @@ public class PromptOrder {
 
     System.out.println("Order Updated.");
     System.out.println(order);
-    System.out.println("Current Orders: ");
-    System.out.println(orderService.getOrders());
+    printCurrentOrdersAndTotalAmount();
   }
 
   public void delete() {
@@ -147,7 +146,19 @@ public class PromptOrder {
     }
     orderService.deleteOrder(orderNo);
     System.out.println("Order deleted: " + orderNo);
+    printCurrentOrdersAndTotalAmount();
+  }
+
+  private void printCurrentOrdersAndTotalAmount() {
     System.out.println("Current Orders: ");
     System.out.println(orderService.getOrders());
+
+    BigDecimal total = BigDecimal.ZERO;
+    for (Order order : orderService.getOrders()) {
+      total = total.add(order.getPrice());
+    }
+
+    System.out.printf("Total: %s\n", total);
   }
+
 }
